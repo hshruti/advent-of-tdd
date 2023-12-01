@@ -1,7 +1,7 @@
 import {describe, expect, test} from '@jest/globals';
 import { getCalibrationSum } from './excerise1';
 
-describe('TEST JEST TYPESCRIPT', () => {
+describe('Day 1 --> Excerise 1', () => {
   test('should returns 0 when string is empty', () => {
     expect(getCalibrationSum(''))
       .toBe(0);
