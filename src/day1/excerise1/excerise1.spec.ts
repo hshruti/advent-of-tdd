@@ -18,10 +18,11 @@ describe('Day 1 --> Excerise 1', () => {
 
   
   test('should returns sum of value when string contain any number for multile lines', () => {
-    expect(getCalibrationSum(`1Abc4
-    sdf
-    10dd5`))
-      .toBe(119);
+    expect(getCalibrationSum(`1abc2
+    pqr3stu8vwx
+    a1b2c3d4e5f
+    treb7uchet`))
+      .toBe(142);
   });
 
 });
