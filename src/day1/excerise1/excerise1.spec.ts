@@ -13,7 +13,7 @@ describe('TEST JEST TYPESCRIPT', () => {
 
   test('should returns sum of value when string contain any number', () => {
     expect(getCalibrationSum('1Abc4'))
-      .toBe(5);
+      .toBe(14);
   });
 
   
@@ -21,7 +21,7 @@ describe('TEST JEST TYPESCRIPT', () => {
     expect(getCalibrationSum(`1Abc4
     sdf
     10dd5`))
-      .toBe(5);
+      .toBe(119);
   });
 
 });
