@@ -25,4 +25,16 @@ describe('Day 1 --> Excerise 1', () => {
       .toBe(142);
   });
 
+    
+  test('should returns sum of value when string contain any number or number in words for multile lines', () => {
+    expect(getCalibrationSum(`two1nine
+    eightwothree
+    abcone2threexyz
+    xtwone3four
+    4nineeightseven2
+    zoneight234
+    7pqrstsixteen`))
+      .toBe(281);
+  });
+
 });

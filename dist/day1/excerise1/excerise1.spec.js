@@ -22,4 +22,14 @@ const excerise1_1 = require("./excerise1");
     treb7uchet`))
             .toBe(142);
     });
+    (0, globals_1.test)('should returns sum of value when string contain any number or number in words for multile lines', () => {
+        (0, globals_1.expect)((0, excerise1_1.getCalibrationSum)(`two1nine
+    eightwothree
+    abcone2threexyz
+    xtwone3four
+    4nineeightseven2
+    zoneight234
+    7pqrstsixteen`))
+            .toBe(281);
+    });
 });

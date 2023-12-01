@@ -3,6 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCalibrationSum = void 0;
 const input_1 = require("./input");
 function getCalibrationSum(input) {
+    ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'].forEach((val, index) => {
+        input = input.replace(new RegExp(val, 'gi'), (val.charAt(0) + (index + 1) + val.charAt(val.length - 1)));
+    });
     return input.replace(/[A-z]/gi, '')
         .split('\n')
         .reduce((accumulator, currentValue) => {
