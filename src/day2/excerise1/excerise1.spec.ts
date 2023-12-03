@@ -29,7 +29,7 @@ describe('Day 2 --> Excerise 1', () => {
       green: 13,
       blue: 14
     }))
-      .toBe(142);
+      .toBe(8);
   });
 
     
