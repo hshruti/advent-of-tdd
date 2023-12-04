@@ -21,4 +21,4 @@ function getTotalScorecards(input) {
     return total;
 }
 exports.getTotalScorecards = getTotalScorecards;
-console.log('Day 4 excerise 1 o/p :', getTotalScorecards(input_1.data));
+console.log('Day 4 excerise 2 o/p :', getTotalScorecards(input_1.data));

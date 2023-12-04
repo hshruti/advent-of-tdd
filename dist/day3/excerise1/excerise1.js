@@ -4,40 +4,49 @@ exports.getSumOfNumberPartOfSchematic = void 0;
 const input_1 = require("./input");
 function getSumOfNumberPartOfSchematic(input) {
     let total = 0;
-    const checkPos = [[-1, -1], [-1, 0], [-1, 1],
-        [0, -1], [0, 1],
-        [1, -1], [1, 0], [1, 1]];
     if (input) {
-        const schematicArr = input.split('\n').map(line => line.trim().split(''));
-        for (let i = 0; i < schematicArr.length; i++) {
-            let numberStart = '';
-            let isAdjacentSymbol = false;
-            for (let j = 0; j < schematicArr[i].length; j++) {
-                if (schematicArr[i][j].search(/[0-9]/) > -1) {
-                    numberStart += schematicArr[i][j];
-                    if (!isAdjacentSymbol) {
-                        for (let k = 0; k < checkPos.length; k++) {
-                            const adjI = i + checkPos[k][0];
-                            const adjJ = j + checkPos[k][1];
-                            if (schematicArr[adjI] && schematicArr[adjI][adjJ] !== undefined
-                                && schematicArr[adjI][adjJ].search(/[0-9]/) === -1 && schematicArr[adjI][adjJ] !== '.') {
-                                isAdjacentSymbol = true;
-                                k = checkPos.length;
-                            }
-                        }
-                    }
+        let numbers = new Map();
+        let symbols = new Map();
+        let arr = input.trim().split('\n').forEach((row, x) => {
+            let numStr = '';
+            let numY = undefined;
+            row.trim().split('').forEach((col, y) => {
+                if (col === '.') {
+                }
+                else if (col.search(/[0-9]/gi) > -1) {
+                    numY = numY == undefined ? y : numY;
+                    numStr += col;
+                    return;
                 }
                 else {
-                    if (numberStart && isAdjacentSymbol) {
-                        total += Number(numberStart);
-                    }
-                    numberStart = '';
-                    isAdjacentSymbol = false;
+                    symbols.set({ x, y }, col);
                 }
+                if (numStr != '') {
+                    numbers.set({ x, y: numY }, Number(numStr));
+                    numStr = '';
+                    numY = undefined;
+                }
+            });
+            if (numStr != '') {
+                numbers.set({ x, y: numY }, Number(numStr));
+                numStr = '';
+                numY = undefined;
             }
-        }
+        });
+        numbers.forEach((val, key) => {
+            let toBeInclude = false;
+            symbols.forEach((symbol, symbolKey) => {
+                if ((key.x - 1) <= symbolKey.x && (key.x + 1) >= symbolKey.x &&
+                    (key.y - 1) <= symbolKey.y && (key.y + val.toString().length) >= symbolKey.y) {
+                    toBeInclude = true;
+                }
+            });
+            if (toBeInclude) {
+                total += val;
+            }
+        });
     }
     return total;
 }
 exports.getSumOfNumberPartOfSchematic = getSumOfNumberPartOfSchematic;
-console.log('Day 3 excerise 1 o/p :', getSumOfNumberPartOfSchematic(input_1.data));
+console.log('Day 3 excerise 1 o/p  560670:', getSumOfNumberPartOfSchematic(input_1.data));

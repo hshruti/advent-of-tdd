@@ -1,7 +1,7 @@
 import {describe, expect, test} from '@jest/globals';
 import { getSumOfNumberPartOfSchematic } from './excerise1';
 
-describe('Day 1 --> Excerise 1', () => {
+describe('Day 3 --> Excerise 1', () => {
   test('should returns 0 when string is empty', () => {
     expect(getSumOfNumberPartOfSchematic(''))
       .toBe(0);
