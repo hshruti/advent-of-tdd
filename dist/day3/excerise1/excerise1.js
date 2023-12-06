@@ -49,4 +49,4 @@ function getSumOfNumberPartOfSchematic(input) {
     return total;
 }
 exports.getSumOfNumberPartOfSchematic = getSumOfNumberPartOfSchematic;
-console.log('Day 3 excerise 1 o/p  560670:', getSumOfNumberPartOfSchematic(input_1.data));
+console.log('Day 3 excerise 1 o/p :', getSumOfNumberPartOfSchematic(input_1.data));
