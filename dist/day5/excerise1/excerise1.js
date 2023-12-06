@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getLowestLocation = void 0;
-const input_1 = require("./input");
 function getLowestLocation(input) {
     let min = Number.POSITIVE_INFINITY;
     if (input) {
@@ -52,25 +51,25 @@ function getLowestLocation(input) {
                         if (previousText !== activeText) {
                             sourceObj = Object.assign({}, destObj);
                             previousText = activeText;
-                            oldRanges = [...ranges];
                         }
-                        oldRanges.forEach((val) => {
-                            if (val.max >= source && val.min < source + length) {
-                                ranges.push({ min: source, max: source + length - 1 });
-                                while (length > 0) {
-                                    if (sourceObj[source]) {
-                                        if (destObj[source][sourceType] === undefined || destObj[source][sourceType] === source) {
-                                            delete destObj[source];
-                                        }
-                                        destObj[dest] = Object.assign({}, sourceObj[source]);
-                                        destObj[dest][destType] = dest;
+                        const keys = Object.keys(sourceObj);
+                        while (length > 0) {
+                            if (Number(keys[keys.length - 1]) >= source && (Number(keys[0]) < (source + length))) {
+                                if (sourceObj[source]) {
+                                    if (destObj[source][sourceType] === undefined || destObj[source][sourceType] === source) {
+                                        delete destObj[source];
                                     }
-                                    source++;
-                                    dest++;
-                                    length--;
+                                    destObj[dest] = Object.assign({}, sourceObj[source]);
+                                    destObj[dest][destType] = dest;
                                 }
+                                source++;
+                                dest++;
+                                length--;
                             }
-                        });
+                            else {
+                                length = 0;
+                            }
+                        }
                     }
                 }
             }
@@ -80,4 +79,4 @@ function getLowestLocation(input) {
     return min;
 }
 exports.getLowestLocation = getLowestLocation;
-console.log('Day 5 excerise 1 o/p :', getLowestLocation(input_1.data));
+//console.log('Day 5 excerise 1 o/p :', getLowestLocation(data));
