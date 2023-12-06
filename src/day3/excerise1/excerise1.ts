@@ -14,7 +14,7 @@ export function getSumOfNumberPartOfSchematic (input:string): number {
                     numY = numY == undefined ? y : numY;
                     numStr += col;
                     return;
-                } else {
+                } else if (col === '*') {
                     symbols.set({x,y}, col);
                 }
                 if(numStr != '') {
@@ -29,18 +29,19 @@ export function getSumOfNumberPartOfSchematic (input:string): number {
                 numY = undefined;
             }
         });
-        numbers.forEach((val, key) => {
-            let toBeInclude = false;
-            symbols.forEach((symbol, symbolKey) => {
-                    if ((key.x - 1) <= symbolKey.x   && (key.x + 1) >= symbolKey.x &&
-                    (key.y - 1) <= symbolKey.y   && (key.y + val.toString().length) >= symbolKey.y) {
-                        toBeInclude = true;
-                    }
+        symbols.forEach((symbol, symbolKey) => {
+            let toBeInclude: any = [];
+            numbers.forEach((val, key) => {
+                        if ((key.x - 1) <= symbolKey.x   && (key.x + 1) >= symbolKey.x &&
+                        (key.y - 1) <= symbolKey.y   && (key.y + val.toString().length) >= symbolKey.y) {
+                            toBeInclude.push(val);
+                        }
             });
 
-            if (toBeInclude) {
-                        total += val;
+            if (toBeInclude.length > 1) {
+                        total += toBeInclude.reduce((a: number, b:number )=> a * b, 1);
             }
+            toBeInclude = [];
         })
     }
     return total;

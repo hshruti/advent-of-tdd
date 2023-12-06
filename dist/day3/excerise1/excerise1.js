@@ -18,7 +18,7 @@ function getSumOfNumberPartOfSchematic(input) {
                     numStr += col;
                     return;
                 }
-                else {
+                else if (col === '*') {
                     symbols.set({ x, y }, col);
                 }
                 if (numStr != '') {
@@ -33,17 +33,18 @@ function getSumOfNumberPartOfSchematic(input) {
                 numY = undefined;
             }
         });
-        numbers.forEach((val, key) => {
-            let toBeInclude = false;
-            symbols.forEach((symbol, symbolKey) => {
+        symbols.forEach((symbol, symbolKey) => {
+            let toBeInclude = [];
+            numbers.forEach((val, key) => {
                 if ((key.x - 1) <= symbolKey.x && (key.x + 1) >= symbolKey.x &&
                     (key.y - 1) <= symbolKey.y && (key.y + val.toString().length) >= symbolKey.y) {
-                    toBeInclude = true;
+                    toBeInclude.push(val);
                 }
             });
-            if (toBeInclude) {
-                total += val;
+            if (toBeInclude.length > 1) {
+                total += toBeInclude.reduce((a, b) => a * b, 1);
             }
+            toBeInclude = [];
         });
     }
     return total;
