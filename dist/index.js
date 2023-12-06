@@ -18,3 +18,4 @@ __exportStar(require("./day1/index"), exports);
 __exportStar(require("./day2/index"), exports);
 __exportStar(require("./day3/index"), exports);
 __exportStar(require("./day4/index"), exports);
+__exportStar(require("./day5/index"), exports);

@@ -4,7 +4,7 @@ import { getLowestLocation } from './excerise1';
 describe('Day 5 --> Excerise 1', () => {
   test('should returns 0 when string is empty', () => {
     expect(getLowestLocation(''))
-      .toBe(0);
+      .toBe(Number.POSITIVE_INFINITY);
   });
   test('should returns the sum of all of the part numbers in the engine schematic', () => {
     expect(getLowestLocation(`seeds: 79 14 55 13
@@ -39,7 +39,7 @@ describe('Day 5 --> Excerise 1', () => {
     
     humidity-to-location map:
     60 56 37
-    56 93 4))
+    56 93 4`))
       .toBe(35);
   });
 
