@@ -4,19 +4,26 @@ exports.getLowestLocation = void 0;
 const input_1 = require("./input");
 function getLowestLocation(input) {
     let min = Number.POSITIVE_INFINITY;
-    const mapText = ['seeds', 'seed-to-soil map', 'soil-to-fertilizer map', 'fertilizer-to-water map', 'water-to-light map',
-        'light-to-temperature map', 'temperature-to-humidity map', 'humidity-to-location map'];
     if (input) {
-        let activeText = '', seeds = {};
+        let activeText = '', sourceObj = {}, destObj = {}, ranges = [], oldRanges = [];
         input.split('\n').forEach(line => {
             if (!!line.trim()) {
+                let previousText = activeText;
                 activeText = line.includes(':') ? line.split(':')[0].trim() : activeText;
                 let values = (line.includes(':') ? line.split(':')[1].trim() : line.trim()).split(' ');
                 if (values.length > 0) {
                     let destType = '', sourceType = '';
                     switch (activeText) {
                         case 'seeds':
-                            values.forEach(val => seeds[val] = { seed: Number(val) });
+                            for (let i = 0; i < values.length; i += 2) {
+                                let val = Number(values[i]);
+                                let endVal = val + Number(values[i + 1]);
+                                ranges.push({ min: val, max: endVal - 1 });
+                                while (val < endVal) {
+                                    destObj[val] = { seed: val };
+                                    val++;
+                                }
+                            }
                             break;
                         case 'seed-to-soil map':
                             destType = 'soil', sourceType = 'seed';
@@ -40,24 +47,35 @@ function getLowestLocation(input) {
                             destType = 'location', sourceType = 'humidity';
                             break;
                     }
-                    if (activeText !== 'seed') {
-                        const [dest, source, length] = values.map(val => Number(val));
-                        Object.keys(seeds).forEach(key => {
-                            seeds[key][destType] = seeds[key][destType] || seeds[key][sourceType];
-                            if (source <= seeds[key][sourceType] && seeds[key][sourceType] <= (source + length)) {
-                                const diff = seeds[key][sourceType] - source;
-                                seeds[key][destType] = dest + diff;
+                    if (activeText !== 'seeds') {
+                        let [dest, source, length] = values.map(val => Number(val));
+                        if (previousText !== activeText) {
+                            sourceObj = Object.assign({}, destObj);
+                            previousText = activeText;
+                            oldRanges = [...ranges];
+                        }
+                        oldRanges.forEach((val) => {
+                            if (val.max >= source && val.min < source + length) {
+                                ranges.push({ min: source, max: source + length - 1 });
+                                while (length > 0) {
+                                    if (sourceObj[source]) {
+                                        if (destObj[source][sourceType] === undefined || destObj[source][sourceType] === source) {
+                                            delete destObj[source];
+                                        }
+                                        destObj[dest] = Object.assign({}, sourceObj[source]);
+                                        destObj[dest][destType] = dest;
+                                    }
+                                    source++;
+                                    dest++;
+                                    length--;
+                                }
                             }
                         });
                     }
                 }
             }
         });
-        Object.keys(seeds).forEach(key => {
-            if (seeds[key].location < min) {
-                min = seeds[key].location;
-            }
-        });
+        return Number(Object.keys(destObj)[0]);
     }
     return min;
 }

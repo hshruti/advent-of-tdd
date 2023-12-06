@@ -40,7 +40,7 @@ describe('Day 5 --> Excerise 1', () => {
     humidity-to-location map:
     60 56 37
     56 93 4`))
-      .toBe(35);
+      .toBe(46);
   });
 
 
