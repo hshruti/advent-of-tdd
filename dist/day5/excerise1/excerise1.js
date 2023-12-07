@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getLowestLocation = void 0;
+const input_1 = require("./input");
 function getLowestLocation(input) {
     let min = Number.POSITIVE_INFINITY;
     if (input) {
-        let activeText = '', sourceObj = {}, destObj = {}, ranges = [], oldRanges = [];
+        let activeText = '', sourceObj = [], destObj = [], newSourceObj = [];
         input.split('\n').forEach(line => {
             if (!!line.trim()) {
                 let previousText = activeText;
@@ -15,13 +16,10 @@ function getLowestLocation(input) {
                     switch (activeText) {
                         case 'seeds':
                             for (let i = 0; i < values.length; i += 2) {
-                                let val = Number(values[i]);
-                                let endVal = val + Number(values[i + 1]);
-                                ranges.push({ min: val, max: endVal - 1 });
-                                while (val < endVal) {
-                                    destObj[val] = { seed: val };
-                                    val++;
-                                }
+                                destObj.push({
+                                    min: Number(values[i]),
+                                    max: Number(values[i]) + Number(values[i + 1]) - 1
+                                });
                             }
                             break;
                         case 'seed-to-soil map':
@@ -49,34 +47,72 @@ function getLowestLocation(input) {
                     if (activeText !== 'seeds') {
                         let [dest, source, length] = values.map(val => Number(val));
                         if (previousText !== activeText) {
-                            sourceObj = Object.assign({}, destObj);
+                            sourceObj = [...destObj, ...sourceObj];
                             previousText = activeText;
+                            destObj = [];
                         }
-                        const keys = Object.keys(sourceObj);
-                        while (length > 0) {
-                            if (Number(keys[keys.length - 1]) >= source && (Number(keys[0]) < (source + length))) {
-                                if (sourceObj[source]) {
-                                    if (destObj[source][sourceType] === undefined || destObj[source][sourceType] === source) {
-                                        delete destObj[source];
+                        if (values.length === 3) {
+                            for (let i = 0; i < sourceObj.length; i++) {
+                                if (sourceObj[i].min >= source && sourceObj[i].min < source + length) {
+                                    if (sourceObj[i].max < source + length) {
+                                        destObj.push({
+                                            min: dest + (sourceObj[i].min - source),
+                                            max: dest + (sourceObj[i].max - source)
+                                        });
                                     }
-                                    destObj[dest] = Object.assign({}, sourceObj[source]);
-                                    destObj[dest][destType] = dest;
+                                    else {
+                                        destObj.push({
+                                            min: dest + (sourceObj[i].min - source),
+                                            max: dest + length - 1
+                                        });
+                                        newSourceObj.push({
+                                            min: source + length,
+                                            max: sourceObj[i].max
+                                        });
+                                    }
                                 }
-                                source++;
-                                dest++;
-                                length--;
+                                else if (sourceObj[i].max >= source && sourceObj[i].max < source + length) {
+                                    destObj.push({
+                                        min: dest,
+                                        max: dest + (sourceObj[i].max - source)
+                                    });
+                                    newSourceObj.push({
+                                        min: sourceObj[i].min,
+                                        max: sourceObj[i].max - 1
+                                    });
+                                }
+                                else if (sourceObj[i].min < source && sourceObj[i].max >= source + length) {
+                                    destObj.push({
+                                        min: dest,
+                                        max: dest + length - 1
+                                    });
+                                    newSourceObj.push({
+                                        min: sourceObj[i].min,
+                                        max: source - 1
+                                    });
+                                    newSourceObj.push({
+                                        min: source + length,
+                                        max: sourceObj[i].max
+                                    });
+                                }
+                                else {
+                                    newSourceObj.push(Object.assign({}, sourceObj[i]));
+                                }
                             }
-                            else {
-                                length = 0;
-                            }
+                            sourceObj = newSourceObj;
+                            newSourceObj = [];
                         }
                     }
                 }
             }
         });
-        return Number(Object.keys(destObj)[0]);
+        [...destObj, ...sourceObj].forEach((val) => {
+            if (min > val.min) {
+                min = val.min;
+            }
+        });
     }
     return min;
 }
 exports.getLowestLocation = getLowestLocation;
-//console.log('Day 5 excerise 1 o/p :', getLowestLocation(data));
+console.log('Day 5 excerise 1 o/p :', getLowestLocation(input_1.data));
