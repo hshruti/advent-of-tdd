@@ -7,9 +7,9 @@ export function getTotalWinings (input:string): number {
       const rounds = input.trim().split('\n');
       rounds.forEach(line => {
         const [cards, bid]  = line.trim().split(' ');
-        const cardWithoutJ = cards.trim().replace(new RegExp('J', 'gi'), '').trim();
-        const firstReplace = cardWithoutJ.trim().replace(new RegExp(cards.trim().charAt(0), 'gi'), '').trim();
-        const secondReplace = firstReplace.trim().replace(new RegExp(firstReplace.charAt(0), 'gi'), '').trim();
+        const cardWithoutJ = cards.trim().replace(new RegExp('J', 'gi'), '').trim(); //J622K -> 622k
+        const firstReplace = cardWithoutJ.trim().replace(new RegExp(cardWithoutJ.trim().charAt(0), 'gi'), '').trim(); // 22k
+        const secondReplace = firstReplace.trim().replace(new RegExp(firstReplace.charAt(0), 'gi'), '').trim(); //k
         const thirdReplace = secondReplace.trim().replace(new RegExp(secondReplace.charAt(0), 'gi'), '').trim();
         const fourthReplace = thirdReplace.trim().replace(new RegExp(thirdReplace.charAt(0), 'gi'), '').trim();
         const totalJ = cards.trim().length - cardWithoutJ.length;
@@ -22,8 +22,8 @@ export function getTotalWinings (input:string): number {
             index = 2;
         } else if (thirdReplace.length === 0 && (
             (firstReplace.length === 2 && secondReplace.length === 1)
-            || ((firstReplace.length + cardGroup.length) === 4 && secondReplace.length === 1)
-            || ((firstReplace.length + cardGroup.length) === 4 && (secondReplace.length + cardGroup.length) === 3)
+            || ((firstReplace.length + totalJ) === 4 && secondReplace.length === 1)
+            || ((firstReplace.length + totalJ) === 4 && (secondReplace.length + totalJ) === 3)
         )) {
             index = 3;
         } else if (thirdReplace.length === 0) {
@@ -46,7 +46,6 @@ export function getTotalWinings (input:string): number {
         };
       });
       let rank = 1;
-      console.log(cardGroup);
       for (let i = cardGroup.length - 1; i >= 0; i--) {
             if (cardGroup[i]) {
                 Object.keys(cardGroup[i]).forEach((key: any) => {
