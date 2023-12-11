@@ -71,4 +71,4 @@ function getConnectingNode ({x,y}: any, map: any, previousNode ={x: -1, y:-1}, c
 }
 
 
-console.log('Day 1 excerise 1 o/p :', getStepsFromStartingPoint(data));
+//console.log('Day 1 excerise 1 o/p :', getStepsFromStartingPoint(data));

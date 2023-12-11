@@ -14,14 +14,4 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./day1/index"), exports);
-__exportStar(require("./day2/index"), exports);
-__exportStar(require("./day3/index"), exports);
-__exportStar(require("./day4/index"), exports);
-__exportStar(require("./day5/index"), exports);
-__exportStar(require("./day6/index"), exports);
-__exportStar(require("./day7/index"), exports);
-__exportStar(require("./day8/index"), exports);
-__exportStar(require("./day9/index"), exports);
-__exportStar(require("./day10/index"), exports);
-__exportStar(require("./day11/index"), exports);
+__exportStar(require("./excerise1"), exports);

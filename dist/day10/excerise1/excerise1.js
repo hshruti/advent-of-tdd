@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getStepsFromStartingPoint = void 0;
-const input_1 = require("./input");
 const mapIndex = new Map();
 mapIndex.set([-1, 0].toString(), ['7', 'F', '|']);
 mapIndex.set([1, 0].toString(), ['J', 'L', '|']);
@@ -67,4 +66,4 @@ function getConnectingNode({ x, y }, map, previousNode = { x: -1, y: -1 }, count
         }
     });
 }
-console.log('Day 1 excerise 1 o/p :', getStepsFromStartingPoint(input_1.data));
+//console.log('Day 1 excerise 1 o/p :', getStepsFromStartingPoint(data));
