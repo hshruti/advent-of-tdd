@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getSumOfExtrapolatedValues = void 0;
 const input_1 = require("./input");
-function getSumOfExtrapolatedValues(input) {
+function getSumOfExtrapolatedValues(input, inEnd = true) {
     if (input.trim()) {
         let count = 0;
         input.trim().split('\n').forEach((line, x) => {
@@ -24,7 +24,12 @@ function getSumOfExtrapolatedValues(input) {
             }
             let diff = 0;
             for (let i = arr.length - 2; i >= 0; i--) {
-                diff = arr[i][arr[i].length - 1] + diff;
+                if (inEnd) {
+                    diff = arr[i][arr[i].length - 1] + diff;
+                }
+                else {
+                    diff = arr[i][0] - diff;
+                }
             }
             count += diff;
         });
@@ -34,3 +39,4 @@ function getSumOfExtrapolatedValues(input) {
 }
 exports.getSumOfExtrapolatedValues = getSumOfExtrapolatedValues;
 console.log('Day 9 excerise 1 o/p :', getSumOfExtrapolatedValues(input_1.data));
+console.log('Day 9 excerise 2 o/p :', getSumOfExtrapolatedValues(input_1.data, false));

@@ -1,5 +1,5 @@
 import {data} from './input';
-export function getSumOfExtrapolatedValues (input:string): number {
+export function getSumOfExtrapolatedValues (input:string, inEnd = true): number {
  if (input.trim()) {
     let count = 0;
     input.trim().split('\n').forEach((line: any, x: number) => {
@@ -22,7 +22,11 @@ export function getSumOfExtrapolatedValues (input:string): number {
         let diff = 0;
 
         for (let i = arr.length -2; i >= 0; i--) {
+            if (inEnd) {
             diff = arr[i][arr[i].length - 1] + diff;
+            } else {
+                diff = arr[i][0] - diff;
+            }
         }
         count += diff;
 
@@ -35,3 +39,4 @@ export function getSumOfExtrapolatedValues (input:string): number {
 }
 
 console.log('Day 9 excerise 1 o/p :', getSumOfExtrapolatedValues(data));
+console.log('Day 9 excerise 2 o/p :', getSumOfExtrapolatedValues(data, false));
