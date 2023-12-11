@@ -6,4 +6,5 @@ export * from './day5/index';
 export * from './day6/index';
 export * from './day7/index';
 export * from './day8/index';
+export * from './day10/index';
 export * from './day11/index';
