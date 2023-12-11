@@ -1,5 +1,5 @@
 import {data} from './input';
-export function getSumOfTheLength (input:string, incrementBy = 1): number {
+export function getSumOfTheLength (input:string, incrementBy = 2): number {
    
     if (input.trim()) {
         let totalSteps = 0;
@@ -19,8 +19,9 @@ export function getSumOfTheLength (input:string, incrementBy = 1): number {
                     count++;
                 }
             });
-            x++;
             if(line.search('#')=== -1) {
+                x+= incrementBy;
+            } else {
                 x++;
             }
         });
@@ -28,7 +29,7 @@ export function getSumOfTheLength (input:string, incrementBy = 1): number {
         for(let index = 0; index <yArr.length; index++){
             let val = yArr[index];
             if (!val) {
-                y += 1;
+                y += incrementBy;
                 
             } else {
                 if (y !== index){
@@ -36,8 +37,8 @@ export function getSumOfTheLength (input:string, incrementBy = 1): number {
                         map[key].y = y;
                     })
                 }
+                y++;
             }
-            y++;
         }
 
         const length = Object.keys(map).length;
@@ -52,3 +53,4 @@ export function getSumOfTheLength (input:string, incrementBy = 1): number {
 }
 
 console.log('Day 11 excerise 1 o/p :', getSumOfTheLength(data));
+console.log('Day 11 excerise 2 o/p :', getSumOfTheLength(data, 1000000));

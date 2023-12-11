@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getSumOfTheLength = void 0;
 const input_1 = require("./input");
-function getSumOfTheLength(input, incrementBy = 1) {
+function getSumOfTheLength(input, incrementBy = 2) {
     if (input.trim()) {
         let totalSteps = 0;
         const map = {};
@@ -21,8 +21,10 @@ function getSumOfTheLength(input, incrementBy = 1) {
                     count++;
                 }
             });
-            x++;
             if (line.search('#') === -1) {
+                x += incrementBy;
+            }
+            else {
                 x++;
             }
         });
@@ -30,7 +32,7 @@ function getSumOfTheLength(input, incrementBy = 1) {
         for (let index = 0; index < yArr.length; index++) {
             let val = yArr[index];
             if (!val) {
-                y += 1;
+                y += incrementBy;
             }
             else {
                 if (y !== index) {
@@ -38,8 +40,8 @@ function getSumOfTheLength(input, incrementBy = 1) {
                         map[key].y = y;
                     });
                 }
+                y++;
             }
-            y++;
         }
         const length = Object.keys(map).length;
         for (let i = 1; i < length; i++) {
@@ -53,3 +55,4 @@ function getSumOfTheLength(input, incrementBy = 1) {
 }
 exports.getSumOfTheLength = getSumOfTheLength;
 console.log('Day 11 excerise 1 o/p :', getSumOfTheLength(input_1.data));
+console.log('Day 11 excerise 2 o/p :', getSumOfTheLength(input_1.data, 1000000));
