@@ -9,3 +9,4 @@ export * from './day8/index';
 export * from './day9/index';
 export * from './day10/index';
 export * from './day11/index';
+export * from './day13/index';
