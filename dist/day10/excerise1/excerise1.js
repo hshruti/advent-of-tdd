@@ -21,7 +21,6 @@ function getStepsFromStartingPoint(input) {
             return line.trim().split('').map((value) => ({ value }));
         });
         getConnectingNode(startIndex, map);
-        console.log(map);
         return map.reduce((max, current) => {
             const dist = current.reduce((_max, _current) => _current.distance && _max < _current.distance ? _current.distance : _max, -1);
             return max > dist ? max : dist;

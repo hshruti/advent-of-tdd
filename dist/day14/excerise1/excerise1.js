@@ -8,7 +8,6 @@ function getTotalLoad(input) {
         const pattern = input.trim().split('\n').map((line) => {
             return line.trim().split('');
         });
-        console.log(pattern.join('\n'));
         const value = pattern.length;
         let emptyIndex = [];
         for (let col = 0; col < pattern[0].length; col++) {
