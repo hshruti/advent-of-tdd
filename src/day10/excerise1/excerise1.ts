@@ -20,8 +20,6 @@ export function getStepsFromStartingPoint (input:string): number {
 
 
  getConnectingNode(startIndex, map);
- 
-console.log(map)
 return map.reduce((max: number, current: any[]) => {
     const dist = current.reduce((_max, _current) => _current.distance && _max < _current.distance ?  _current.distance : _max, -1);
     return max > dist ? max: dist;
