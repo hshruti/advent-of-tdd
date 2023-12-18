@@ -69,5 +69,5 @@ function isRefection(pattern: any) {
     return Math.floor(patternLength);
 }
 
-console.log('Day 13 excerise 1 o/p :', getNumberOfReflectionNode(data));
+//console.log('Day 13 excerise 1 o/p :', getNumberOfReflectionNode(data));
 

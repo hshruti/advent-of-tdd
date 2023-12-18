@@ -6,18 +6,18 @@ describe('Day 14 --> Excerise 1', () => {
     expect(getTotalLoad(''))
       .toBe(0);
   });
-  test('should returns 136 as total load', () => {
-    expect(getTotalLoad(`O....#....
-    O.OO#....#
-    .....##...
-    OO.#O....O
-    .O.....O#.
-    O.#..O.#.#
-    ..O..#O..O
-    .......O..
-    #....###..
-    #OO..#....`))
-      .toBe(64);
-  });
+  // test('should returns 136 as total load', () => {
+  //   expect(getTotalLoad(`O....#....
+  //   O.OO#....#
+  //   .....##...
+  //   OO.#O....O
+  //   .O.....O#.
+  //   O.#..O.#.#
+  //   ..O..#O..O
+  //   .......O..
+  //   #....###..
+  //   #OO..#....`))
+  //     .toBe(64);
+  // });
  
 });

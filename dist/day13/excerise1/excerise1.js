@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getNumberOfReflectionNode = void 0;
-const input_1 = require("./input");
 function getNumberOfReflectionNode(input) {
     if (input.trim()) {
         let total = 0, isVertical = 0, verticalPattern = [], pattern = [], index = 0, startIndex = undefined, endIndex = undefined;
@@ -66,4 +65,4 @@ function isRefection(pattern) {
     }
     return Math.floor(patternLength);
 }
-console.log('Day 13 excerise 1 o/p :', getNumberOfReflectionNode(input_1.data));
+//console.log('Day 13 excerise 1 o/p :', getNumberOfReflectionNode(data));
